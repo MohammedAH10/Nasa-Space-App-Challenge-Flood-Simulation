@@ -3559,3 +3559,428 @@ ul {
     opacity: 1;
   }
 }
+
+/* ---------- Responsive ---------- */
+
+@media (min-width: 1500px) {
+  .gauge-row {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 1320px) {
+  .gauge-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .builder-grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(380px, 0.9fr);
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .success-card {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 1120px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    min-height: 360px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(46px, 8vw, 70px);
+  }
+
+  .builder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .builder-console {
+    position: static;
+    max-height: none;
+  }
+
+  .launch-dock {
+    position: static;
+  }
+
+  .console-body {
+    max-height: 640px;
+  }
+
+  .viewport-canvas-wrap {
+    height: clamp(380px, 52vh, 560px);
+  }
+
+  .results-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .report-column {
+    position: static;
+  }
+
+  .report-panel {
+    max-height: none;
+  }
+
+  .report-body {
+    max-height: 560px;
+  }
+}
+
+@media (max-width: 960px) {
+  .topbar-center {
+    display: none;
+  }
+
+  .app-main,
+  .app-footer {
+    width: min(100% - 32px, 1680px);
+  }
+
+  .app-main,
+  .app-footer {
+    width: calc(100% - 32px);
+  }
+
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .difficulty-row {
+    grid-template-columns: 1fr;
+  }
+
+  .scenario-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .how-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reference-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-visual {
+    min-height: 320px;
+  }
+
+  .results-header {
+    flex-direction: column;
+  }
+
+  .results-actions {
+    justify-content: flex-start;
+    max-width: none;
+  }
+
+  .launch-dock {
+    flex-wrap: wrap;
+  }
+
+  .launch-actions {
+    margin-left: auto;
+  }
+
+  .tutorial-modal {
+    grid-template-columns: 1fr;
+  }
+
+  .tutorial-art {
+    min-height: 120px;
+    margin: 16px 16px 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    height: auto;
+    padding: 10px 14px;
+    flex-wrap: wrap;
+  }
+
+  .topbar-right {
+    width: 100%;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .topbar-right .ghost-chip {
+    display: none;
+  }
+
+  .weather-chip {
+    margin-right: auto;
+  }
+
+  .brand-text small {
+    display: none;
+  }
+
+  .app-main {
+    width: calc(100% - 22px);
+    padding-top: 14px;
+  }
+
+  .app-footer {
+    width: calc(100% - 22px);
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .hero {
+    padding-top: 22px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(40px, 12vw, 58px);
+  }
+
+  .hero-visual {
+    min-height: 270px;
+    border-radius: 20px;
+  }
+
+  .hero-earth {
+    width: 240px;
+    height: 240px;
+    bottom: -140px;
+  }
+
+  .hero-readout {
+    transform: scale(0.86);
+    transform-origin: top left;
+  }
+
+  .readout-b {
+    transform-origin: bottom right;
+  }
+
+  .hero-stats {
+    gap: 8px 18px;
+  }
+
+  .scenario-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scenario-card {
+    padding: 18px;
+  }
+
+  .scenario-foot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .gauge-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .viewport-canvas-wrap {
+    height: 340px;
+  }
+
+  .viewport-telemetry {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .viewport-note {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .design-tags {
+    justify-content: flex-start;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .success-card {
+    grid-column: auto;
+  }
+
+  .success-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .success-ring {
+    width: 130px;
+    height: 130px;
+    align-self: center;
+  }
+
+  .score-bar {
+    grid-template-columns: 100px 1fr 50px;
+  }
+
+  .failure-row {
+    grid-template-columns: 1fr 40px;
+    grid-template-areas:
+      "label count"
+      "bar bar";
+    gap: 4px 8px;
+    padding-bottom: 2px;
+  }
+
+  .failure-label {
+    grid-area: label;
+    white-space: normal;
+    align-items: flex-start;
+  }
+
+  .failure-dot {
+    margin-top: 5px;
+  }
+
+  .failure-track {
+    grid-area: bar;
+  }
+
+  .failure-row > strong {
+    grid-area: count;
+  }
+
+  .failure-pct {
+    display: none;
+  }
+
+  .constraint-cards,
+  .improvement-grid,
+  .reference-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .launch-dock {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .launch-actions {
+    margin-left: 0;
+  }
+
+  .launch-btn {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .dock-confirms {
+    order: 2;
+  }
+
+  .running-panel {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px;
+    margin-top: 3vh;
+  }
+
+  .radar {
+    width: 110px;
+    height: 110px;
+  }
+
+  .results-header h1 {
+    font-size: 28px;
+  }
+
+  .tutorial-copy {
+    padding: 18px;
+  }
+
+  .tutorial-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .tutorial-footer .row-gap {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 520px) {
+  .topbar-right .ghost-chip {
+    font-size: 9px;
+  }
+
+  .brief-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .weather-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .confirm-grid,
+  .priority-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .console-tab {
+    font-size: 10px;
+  }
+
+  .section-card {
+    padding: 10px;
+  }
+
+  .launch-actions {
+    flex-direction: column-reverse;
+  }
+
+  .launch-btn,
+  .launch-actions .btn {
+    width: 100%;
+  }
+
+  .score-bar {
+    grid-template-columns: 94px 1fr 44px;
+  }
+
+  .failure-row {
+    grid-template-columns: 96px 1fr 34px;
+  }
+
+  .scenario-meta {
+    gap: 6px;
+  }
+
+  .hero-readout.readout-c {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
