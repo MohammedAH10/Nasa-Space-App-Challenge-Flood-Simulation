@@ -6,11 +6,16 @@
     "blurb": "Small dedicated launch. Cheap, nimble, modest payload.",
     "costM": 7.5,
     "reliability": 0.97,
-    "capacityKg": {
-      "LEO": 300,
-      "SSO": 250,
-      "GEO": 0
-    }
+    "capacityKg": { "LEO": 300, "SSO": 250, "GEO": 0 }
+  },
+  {
+    "id": "electron-reflight",
+    "name": "Electron Reflight",
+    "provider": "Rocket Lab",
+    "blurb": "Flight-proven booster with a better reliability record and a small price bump.",
+    "costM": 8.4,
+    "reliability": 0.985,
+    "capacityKg": { "LEO": 300, "SSO": 250, "GEO": 0 }
   },
   {
     "id": "firefly-alpha",
@@ -19,11 +24,7 @@
     "blurb": "Small-lift workhorse with a little more mass margin.",
     "costM": 8,
     "reliability": 0.965,
-    "capacityKg": {
-      "LEO": 1000,
-      "SSO": 750,
-      "GEO": 0
-    }
+    "capacityKg": { "LEO": 1000, "SSO": 750, "GEO": 0 }
   },
   {
     "id": "falcon9-rideshare",
@@ -32,11 +33,7 @@
     "blurb": "Reliable rideshare. More capacity, less schedule control.",
     "costM": 12.5,
     "reliability": 0.985,
-    "capacityKg": {
-      "LEO": 2200,
-      "SSO": 1600,
-      "GEO": 500
-    }
+    "capacityKg": { "LEO": 2200, "SSO": 1600, "GEO": 500 }
   },
   {
     "id": "pslv",
@@ -45,11 +42,7 @@
     "blurb": "Proven polar-orbit launcher with generous capacity.",
     "costM": 14,
     "reliability": 0.96,
-    "capacityKg": {
-      "LEO": 3250,
-      "SSO": 1750,
-      "GEO": 0
-    }
+    "capacityKg": { "LEO": 3250, "SSO": 1750, "GEO": 0 }
   },
   {
     "id": "ariane-62",
@@ -58,10 +51,6 @@
     "blurb": "Heavy-lift option for ambitious multi-instrument missions.",
     "costM": 30,
     "reliability": 0.975,
-    "capacityKg": {
-      "LEO": 10000,
-      "SSO": 6000,
-      "GEO": 3000
-    }
+    "capacityKg": { "LEO": 10000, "SSO": 6000, "GEO": 3000 }
   }
 ]
