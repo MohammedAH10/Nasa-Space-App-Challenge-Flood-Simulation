@@ -87,6 +87,20 @@
       "degradationPerYear": 0.018
     },
     {
+      "id": "panel-200",
+      "category": "panel",
+      "name": "SolarWing 200",
+      "blurb": "Mid-size array with useful power margin for imaging payloads.",
+      "tier": "advanced",
+      "massKg": 8,
+      "powerW": 0,
+      "costM": 1.3,
+      "reliability": 0.988,
+      "peakW": 200,
+      "areaM2": 1.9,
+      "degradationPerYear": 0.016
+    },
+    {
       "id": "panel-260",
       "category": "panel",
       "name": "SolarWing 260",
