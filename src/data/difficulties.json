@@ -1,0 +1,29 @@
+[
+  {
+    "id": "cadet",
+    "name": "Cadet",
+    "description": "Basic parts only, storms disabled, gentler component failures. Learn the trade-offs.",
+    "allowedPartTiers": ["basic"],
+    "stormScale": 0,
+    "failureScale": 0.7,
+    "budgetScale": 1.1
+  },
+  {
+    "id": "engineer",
+    "name": "Flight Engineer",
+    "description": "All parts, real space weather, standard failure rates. The intended experience.",
+    "allowedPartTiers": ["basic", "advanced"],
+    "stormScale": 1,
+    "failureScale": 1,
+    "budgetScale": 1
+  },
+  {
+    "id": "commander",
+    "name": "Mission Commander",
+    "description": "All parts, harsher storms and failures, and a 5% tighter budget.",
+    "allowedPartTiers": ["basic", "advanced"],
+    "stormScale": 1.35,
+    "failureScale": 1.2,
+    "budgetScale": 0.95
+  }
+]
