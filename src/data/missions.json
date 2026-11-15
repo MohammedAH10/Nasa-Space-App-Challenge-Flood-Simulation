@@ -1,0 +1,62 @@
+[
+  {
+    "id": "smap",
+    "name": "SMAP",
+    "agency": "NASA",
+    "launched": "2015",
+    "massKg": 944,
+    "powerW": 1450,
+    "orbitType": "SSO",
+    "altitudeKm": 685,
+    "revisitDays": 2.5,
+    "designLifeYears": 3,
+    "note": "Soil Moisture Active Passive maps global soil moisture and freeze/thaw state every 2-3 days. Its L-band radar failed in 2015; the radiometer continued.",
+    "url": "https://smap.jpl.nasa.gov/observatory/specifications/",
+    "source": "NASA/JPL SMAP launch press kit (mass 944 kg, power 1,450 W, 685 km SSO, 3-year prime mission)."
+  },
+  {
+    "id": "landsat-9",
+    "name": "Landsat 9",
+    "agency": "NASA / USGS",
+    "launched": "2021",
+    "massKg": 2711,
+    "powerW": 4300,
+    "orbitType": "SSO",
+    "altitudeKm": 705,
+    "revisitDays": 8,
+    "designLifeYears": 5,
+    "note": "Landsat 9 extends the 50-year land-imaging record with 30 m multispectral imagery and an 8-day combined revisit with Landsat 8.",
+    "url": "https://science.nasa.gov/mission/landsat-9/",
+    "source": "NASA Science Landsat 9 mission page (705 km, 99-minute orbit, 5-year design life); NASA fast facts (2,710 kg), WMO OSCAR (4,300 W)."
+  },
+  {
+    "id": "gpm",
+    "name": "GPM Core Observatory",
+    "agency": "NASA / JAXA",
+    "launched": "2014",
+    "massKg": 3850,
+    "powerW": 1950,
+    "orbitType": "LEO",
+    "altitudeKm": 407,
+    "revisitDays": 3,
+    "designLifeYears": 3,
+    "note": "GPM Core carries a dual-frequency precipitation radar and a microwave imager, flying at 65 degrees inclination to sample rain and snow worldwide.",
+    "url": "https://gpm.nasa.gov/missions/GPM/gpm-core-observatory",
+    "source": "NASA GPM mission page and 2014 press kit (3,850 kg, 1,950 W, 407 km, 65 degrees, 3-year design life)."
+  },
+  {
+    "id": "nisar",
+    "name": "NISAR",
+    "agency": "NASA / ISRO",
+    "launched": "2025",
+    "massKg": 2380,
+    "powerW": 5000,
+    "orbitType": "SSO",
+    "altitudeKm": 747,
+    "revisitDays": 6,
+    "designLifeYears": 3,
+    "note": "NISAR's dual L- and S-band radars scan nearly all land and ice twice every 12 days, with an average revisit of about 6 days.",
+    "url": "https://science.nasa.gov/mission/nisar/mission-overview",
+    "source": "NASA NISAR mission overview (747 km, 98.4 degrees, 12-day repeat, 3-year prime mission); NASA/JPL quick facts (about 2,380 kg, about 5 kW)."
+  }
+]
