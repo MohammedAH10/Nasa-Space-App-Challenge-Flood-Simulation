@@ -1,0 +1,11 @@
+{
+  "capturedAt": "2026-11-15T00:00:00Z",
+  "source": "Static NOAA SWPC snapshot (offline fallback)",
+  "kpIndex": 3,
+  "solarWindSpeedKms": 430,
+  "solarWindDensity": 4.6,
+  "flaresLast24h": 1,
+  "cmeLast72h": 0,
+  "stormProbability": 0.18,
+  "note": "Kp 3 is unsettled. Geomagnetic storm activity is modest."
+}
