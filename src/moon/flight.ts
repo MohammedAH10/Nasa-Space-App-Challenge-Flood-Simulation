@@ -45,11 +45,6 @@ function ease(t: number): number {
   return t * t * (3 - 2 * t);
 }
 
-function phaseProgress(runtime: FlightRuntime): number {
-  if (runtime.phase === "done") return 1;
-  return clamp(runtime.phaseElapsed / PHASE_DURATION[runtime.phase], 0, 1);
-}
-
 export function createFlightRuntime(evaluation: BuildEvaluation): FlightRuntime {
   const hasBoosters = evaluation.stats.hasBoosters;
   return {

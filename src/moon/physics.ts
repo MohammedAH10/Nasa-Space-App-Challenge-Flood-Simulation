@@ -38,7 +38,6 @@ export function computeStats(build: RocketBuild): BuildStats {
   const { bySlot, present } = rocketParts(build);
   const nose = bySlot.nose;
   const capsule = bySlot.capsule;
-  const fuel = bySlot.fuel;
   const engine = bySlot.engine;
   const booster = bySlot.booster;
   const fins = bySlot.fins;

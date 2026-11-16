@@ -84,13 +84,6 @@ function makeFlagTexture(): THREE.CanvasTexture {
   return texture;
 }
 
-function makeTankBand(radius: number, height: number, color: number): THREE.Mesh {
-  return new THREE.Mesh(
-    new THREE.CylinderGeometry(radius + 0.006, radius + 0.006, height, 28, 1, true),
-    standard(color, { roughness: 0.45, metalness: 0.35 }),
-  );
-}
-
 function addStackPart(
   group: THREE.Group,
   part: MoonPart,

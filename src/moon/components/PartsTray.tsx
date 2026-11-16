@@ -52,14 +52,13 @@ export default function PartsTray({ slot, selectedId, onFit, onClear }: PartsTra
       </div>
       <p className="moon-tray-hint">{info.hint}</p>
 
-      <div className="moon-parts-grid" role="list">
+      <div className="moon-parts-grid">
         {parts.map((part) => {
           const selected = selectedId === part.id;
           return (
             <button
               key={part.id}
               type="button"
-              role="listitem"
               className={`moon-part-card ${selected ? "selected" : ""}`}
               style={{ "--part": part.accent } as CSSProperties}
               onClick={() => onFit(part.id)}
