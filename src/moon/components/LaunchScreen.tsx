@@ -103,7 +103,9 @@ export default function LaunchScreen() {
       Boolean(target.closest("button, input, textarea, select, a"));
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (isControl(event.target)) return;
+      if (isControl(event.target) || document.querySelector(".moon-modal")) {
+        return;
+      }
       if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
         event.preventDefault();
         inputRef.current.steer = -1;

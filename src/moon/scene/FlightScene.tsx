@@ -333,6 +333,9 @@ export default function FlightScene({
     const container = containerRef.current;
     if (!container) return;
 
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const scene = new THREE.Scene();
     scene.fog = new THREE.FogExp2(0x030512, 0.0009);
 
@@ -498,9 +501,11 @@ export default function FlightScene({
         }
       });
 
-      stars.rotation.y = elapsed * 0.002;
-      moon.rotation.y = elapsed * 0.004;
-      moonHalo.material.opacity = 0.24 + Math.sin(elapsed * 0.9) * 0.04;
+      if (!reduceMotion) {
+        stars.rotation.y = elapsed * 0.002;
+        moon.rotation.y = elapsed * 0.004;
+        moonHalo.material.opacity = 0.24 + Math.sin(elapsed * 0.9) * 0.04;
+      }
 
       const rocketPos = rocketGroup.position;
       lookTarget.set(rocketPos.x, rocketPos.y + 2.1, rocketPos.z);
@@ -538,5 +543,5 @@ export default function FlightScene({
     };
   }, [build]);
 
-  return <div ref={containerRef} className="moon-flight-scene" />;
+  return <div ref={containerRef} className="moon-flight-scene" aria-hidden="true" />;
 }
