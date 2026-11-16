@@ -7,6 +7,7 @@ import { useMoonStore } from "../store";
 import { evaluateBuild } from "../validation";
 import type { PartSlot } from "../types";
 import AssemblyScene from "../scene/AssemblyScene";
+import MissionBrief from "./MissionBrief";
 import PartsTray, { MOON_PART_MIME } from "./PartsTray";
 import RocketBlueprint from "./RocketBlueprint";
 import StatsPanel from "./StatsPanel";
@@ -133,6 +134,7 @@ export default function AssemblyScreen() {
         </div>
 
         <aside className="moon-assembly-side">
+          <MissionBrief evaluation={evaluation} />
           <RocketBlueprint
             build={build}
             selectedSlot={selectedSlot}

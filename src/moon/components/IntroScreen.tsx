@@ -4,6 +4,7 @@ import { ACHIEVEMENTS } from "../achievements";
 import { MISSION } from "../constants";
 import { formatDeltaV } from "../physics";
 import { useMoonStore } from "../store";
+import Nova from "./Nova";
 
 export default function IntroScreen() {
   const setStage = useMoonStore((state) => state.setStage);
@@ -26,6 +27,13 @@ export default function IntroScreen() {
           the Moon. Balance power, fuel, and a soft landing — then steer and
           stage your way through the sky.
         </p>
+
+        <div className="moon-intro-nova">
+          <Nova
+            message="Hi, I'm Nova! I'll help you pick parts, check the numbers, and fly to the Moon."
+            compact
+          />
+        </div>
 
         <div className="moon-intro-actions">
           <button
