@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
+import "./moon.css";
 
 export const metadata: Metadata = {
   title: "Moon Squad — Build a rocket, land on the Moon",
