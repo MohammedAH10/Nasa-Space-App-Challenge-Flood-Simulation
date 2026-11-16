@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useMoonStore } from "../store";
 import AssemblyScreen from "./AssemblyScreen";
 import IntroScreen from "./IntroScreen";
+import LaunchScreen from "./LaunchScreen";
 
 export default function MoonGame() {
   const stage = useMoonStore((state) => state.stage);
@@ -41,19 +42,7 @@ export default function MoonGame() {
 
         {hydrated && stage === "assembly" ? <AssemblyScreen /> : null}
 
-        {hydrated && stage === "launch" ? (
-          <section className="moon-placeholder">
-            <p className="moon-eyebrow">Launch complex</p>
-            <h1>Launch sequence loading.</h1>
-            <button
-              type="button"
-              className="moon-btn ghost"
-              onClick={() => setStage("assembly")}
-            >
-              Back to the shed
-            </button>
-          </section>
-        ) : null}
+        {hydrated && stage === "launch" ? <LaunchScreen /> : null}
 
         {hydrated && stage === "results" ? (
           <section className="moon-placeholder">
