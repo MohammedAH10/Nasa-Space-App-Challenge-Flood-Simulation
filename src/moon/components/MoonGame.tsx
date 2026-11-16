@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { ACHIEVEMENTS } from "../achievements";
 import { useMoonStore } from "../store";
 import AssemblyScreen from "./AssemblyScreen";
 import IntroScreen from "./IntroScreen";
@@ -12,6 +13,8 @@ export default function MoonGame() {
   const hydrated = useMoonStore((state) => state.hydrated);
   const hydrate = useMoonStore((state) => state.hydrate);
   const setStage = useMoonStore((state) => state.setStage);
+  const bestScore = useMoonStore((state) => state.bestScore);
+  const achievements = useMoonStore((state) => state.achievements);
 
   useEffect(() => {
     hydrate();
@@ -28,6 +31,10 @@ export default function MoonGame() {
           MOON SQUAD
         </button>
         <span className="moon-topbar-chip">Mission: Luna Landing</span>
+        <span className="moon-topbar-chip">
+          Best {bestScore > 0 ? bestScore : "—"} · {achievements.length}/
+          {ACHIEVEMENTS.length} badges
+        </span>
         <span className="moon-topbar-spacer" />
       </header>
 

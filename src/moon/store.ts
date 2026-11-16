@@ -31,6 +31,7 @@ interface MoonStore {
   tutorialOpen: boolean;
   tutorialSeen: boolean;
   hydrated: boolean;
+  hasSave: boolean;
   lastFit: FitPulse | null;
   hydrate: () => void;
   setStage: (stage: GameStage) => void;
@@ -63,6 +64,7 @@ export const useMoonStore = create<MoonStore>((set, get) => {
       soundOn: state.soundOn,
       tutorialSeen: state.tutorialSeen,
     });
+    if (!get().hasSave) set({ hasSave: true });
   };
 
   const grant = (ids: string[]) => {
@@ -98,6 +100,7 @@ export const useMoonStore = create<MoonStore>((set, get) => {
     tutorialOpen: false,
     tutorialSeen: false,
     hydrated: false,
+    hasSave: false,
     lastFit: null,
 
     hydrate: () => {
@@ -112,9 +115,10 @@ export const useMoonStore = create<MoonStore>((set, get) => {
           soundOn: saved.soundOn,
           tutorialSeen: saved.tutorialSeen,
           hydrated: true,
+          hasSave: true,
         });
       } else {
-        set({ hydrated: true });
+        set({ hydrated: true, hasSave: false });
       }
     },
 
