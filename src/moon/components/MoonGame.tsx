@@ -9,6 +9,7 @@ import AssemblyScreen from "./AssemblyScreen";
 import IntroScreen from "./IntroScreen";
 import LaunchScreen from "./LaunchScreen";
 import ResultsScreen from "./ResultsScreen";
+import Tutorial from "./Tutorial";
 
 export default function MoonGame() {
   const stage = useMoonStore((state) => state.stage);
@@ -19,6 +20,9 @@ export default function MoonGame() {
   const achievements = useMoonStore((state) => state.achievements);
   const soundOn = useMoonStore((state) => state.soundOn);
   const toggleSound = useMoonStore((state) => state.toggleSound);
+  const tutorialOpen = useMoonStore((state) => state.tutorialOpen);
+  const tutorialSeen = useMoonStore((state) => state.tutorialSeen);
+  const openTutorial = useMoonStore((state) => state.openTutorial);
 
   useEffect(() => {
     hydrate();
@@ -27,6 +31,12 @@ export default function MoonGame() {
   useEffect(() => {
     moonAudio.setEnabled(soundOn);
   }, [soundOn]);
+
+  useEffect(() => {
+    if (hydrated && stage === "intro" && !tutorialSeen) {
+      openTutorial();
+    }
+  }, [hydrated, stage, tutorialSeen, openTutorial]);
 
   useEffect(() => {
     const unlock = () => moonAudio.unlock();
@@ -55,6 +65,17 @@ export default function MoonGame() {
         </span>
         <span className="moon-topbar-spacer" />
         <div className="moon-topbar-actions">
+          <button
+            type="button"
+            className="moon-icon-btn"
+            onClick={() => {
+              moonAudio.play("click");
+              openTutorial();
+            }}
+            aria-label="Open Nova's guide"
+          >
+            Guide
+          </button>
           <button
             type="button"
             className="moon-icon-btn"
@@ -89,6 +110,7 @@ export default function MoonGame() {
         {hydrated && stage === "results" ? <ResultsScreen /> : null}
       </main>
 
+      {hydrated && tutorialOpen ? <Tutorial /> : null}
       <AchievementToasts />
     </div>
   );
