@@ -2141,7 +2141,7 @@
     padding: 8px 10px;
   }
 
-  .moon-hud-card:first-child {
+  .moon-hud-top > .moon-hud-card {
     display: none;
   }
 
@@ -3531,5 +3531,124 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+
+/* ---------- Small screens and touch ---------- */
+
+@media (max-width: 640px) {
+  .moon-topbar {
+    gap: 8px;
+    padding: 12px 14px;
+  }
+
+  .moon-logo {
+    font-size: 0.92rem;
+    letter-spacing: 0.12em;
+  }
+
+  .moon-topbar-actions {
+    gap: 6px;
+  }
+
+  .moon-icon-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    font-size: 0.68rem;
+  }
+
+  .moon-main {
+    padding: 18px 14px 44px;
+  }
+
+  .moon-intro {
+    gap: 22px;
+  }
+
+  .moon-intro-actions {
+    gap: 8px;
+  }
+
+  .moon-intro-actions .moon-btn {
+    flex: 1 1 100%;
+  }
+
+  .moon-intro-meta {
+    gap: 6px;
+  }
+
+  .moon-pill {
+    padding: 6px 10px;
+    font-size: 0.72rem;
+  }
+
+  .moon-viewport {
+    height: clamp(320px, 44dvh, 400px);
+  }
+
+  .moon-hangar.empty .moon-btn {
+    width: 100%;
+  }
+
+  .moon-launch-stage {
+    height: 68dvh;
+    min-height: 430px;
+    border-radius: 20px;
+  }
+
+  .moon-launch-head-actions {
+    width: 100%;
+  }
+
+  .moon-launch-head-actions .moon-btn {
+    flex: 1;
+  }
+
+  .moon-flight-controls {
+    gap: 7px;
+  }
+
+  .moon-steer-panel,
+  .moon-stage-panel {
+    padding: 9px 10px;
+  }
+
+  .moon-tutorial-actions .moon-btn {
+    flex: 1;
+  }
+}
+
+@media (max-width: 400px) {
+  .moon-hud-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .moon-hud-card:last-child {
+    grid-column: span 2;
+  }
+
+  .moon-launch-status {
+    display: none;
+  }
+
+  .moon-stage-panel {
+    flex-basis: 100%;
+  }
+}
+
+@media (pointer: coarse) {
+  .moon-steer-btn,
+  .moon-stage-btn,
+  .moon-slot-main,
+  .moon-slot-clear,
+  .moon-tray-empty,
+  .moon-icon-btn {
+    min-height: 44px;
+  }
+
+  .moon-btn:hover:not(:disabled) {
+    transform: none;
   }
 }
