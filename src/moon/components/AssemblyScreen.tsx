@@ -9,6 +9,7 @@ import type { PartSlot } from "../types";
 import AssemblyScene from "../scene/AssemblyScene";
 import PartsTray, { MOON_PART_MIME } from "./PartsTray";
 import RocketBlueprint from "./RocketBlueprint";
+import StatsPanel from "./StatsPanel";
 
 export default function AssemblyScreen() {
   const build = useMoonStore((state) => state.build);
@@ -146,6 +147,8 @@ export default function AssemblyScreen() {
           />
         </aside>
       </div>
+
+      <StatsPanel evaluation={evaluation} />
 
       <div className={`moon-launch-dock ${evaluation.canLaunch ? "ready" : "blocked"}`}>
         <div className="moon-dock-status">

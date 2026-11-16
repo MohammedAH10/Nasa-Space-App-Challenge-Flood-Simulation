@@ -1339,3 +1339,291 @@
     min-width: 0;
   }
 }
+
+
+/* ---------- Mission check panel ---------- */
+
+.moon-check-panel {
+  padding: 20px;
+  border: 1px solid var(--moon-border);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(20, 28, 62, 0.7), rgba(9, 14, 34, 0.86));
+  box-shadow: 0 18px 44px rgba(2, 5, 20, 0.3);
+}
+
+.moon-check-panel.ready {
+  border-color: rgba(112, 224, 0, 0.34);
+}
+
+.moon-check-panel.risky {
+  border-color: rgba(255, 209, 102, 0.3);
+}
+
+.moon-check-panel.blocked {
+  border-color: rgba(255, 93, 115, 0.32);
+}
+
+.moon-check-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.moon-check-head .moon-eyebrow {
+  margin-bottom: 4px;
+}
+
+.moon-check-head h2 {
+  margin: 0;
+  font-family: ui-rounded, var(--moon-font);
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
+  letter-spacing: -0.01em;
+}
+
+.moon-readiness {
+  flex: none;
+  padding: 7px 12px;
+  border: 1px solid var(--moon-border);
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.moon-readiness.ready {
+  border-color: rgba(112, 224, 0, 0.42);
+  background: rgba(112, 224, 0, 0.1);
+  color: var(--moon-green);
+}
+
+.moon-readiness.risky {
+  border-color: rgba(255, 209, 102, 0.42);
+  background: rgba(255, 209, 102, 0.1);
+  color: var(--moon-yellow);
+}
+
+.moon-readiness.blocked {
+  border-color: rgba(255, 93, 115, 0.42);
+  background: rgba(255, 93, 115, 0.1);
+  color: var(--moon-danger);
+}
+
+.moon-check-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.moon-gauge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.moon-gauge {
+  padding: 12px;
+  border: 1px solid rgba(126, 150, 255, 0.14);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.028);
+}
+
+.moon-gauge-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--moon-muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.moon-gauge-head strong {
+  color: var(--moon-text);
+  font-size: 0.88rem;
+}
+
+.moon-gauge-track {
+  height: 7px;
+  margin: 9px 0 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.moon-gauge-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--gauge);
+  box-shadow: 0 0 14px var(--gauge);
+  transition: width 0.35s ease;
+}
+
+.moon-gauge-foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+  color: var(--moon-faint);
+  font-size: 0.6rem;
+  line-height: 1.3;
+}
+
+.moon-gauge-foot em {
+  color: var(--moon-yellow);
+  font-size: 0.54rem;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.moon-checklist {
+  display: grid;
+  align-content: start;
+  gap: 7px;
+}
+
+.moon-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 11px;
+  border: 1px solid rgba(126, 150, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.moon-check-status {
+  flex: none;
+  min-width: 54px;
+  padding: 3px 6px;
+  border: 1px solid var(--moon-border);
+  border-radius: 999px;
+  font-size: 0.54rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+.moon-check-item.ok .moon-check-status {
+  border-color: rgba(112, 224, 0, 0.4);
+  background: rgba(112, 224, 0, 0.1);
+  color: var(--moon-green);
+}
+
+.moon-check-item.warn .moon-check-status {
+  border-color: rgba(255, 209, 102, 0.4);
+  background: rgba(255, 209, 102, 0.1);
+  color: var(--moon-yellow);
+}
+
+.moon-check-item.fail .moon-check-status {
+  border-color: rgba(255, 93, 115, 0.4);
+  background: rgba(255, 93, 115, 0.1);
+  color: var(--moon-danger);
+}
+
+.moon-check-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.moon-check-copy strong {
+  font-size: 0.77rem;
+}
+
+.moon-check-copy span {
+  color: var(--moon-muted);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.moon-nova-tip {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(76, 201, 240, 0.26);
+  border-radius: 14px;
+  background: rgba(76, 201, 240, 0.06);
+}
+
+.moon-nova-tip.fail {
+  border-color: rgba(255, 93, 115, 0.38);
+  background: rgba(255, 93, 115, 0.07);
+}
+
+.moon-nova-tip.warn {
+  border-color: rgba(255, 209, 102, 0.36);
+  background: rgba(255, 209, 102, 0.07);
+}
+
+.moon-nova-tip.ok {
+  border-color: rgba(112, 224, 0, 0.34);
+  background: rgba(112, 224, 0, 0.06);
+}
+
+.moon-nova-dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: var(--moon-cyan);
+  box-shadow: 0 0 12px rgba(76, 201, 240, 0.8);
+}
+
+.moon-nova-tip.fail .moon-nova-dot {
+  background: var(--moon-danger);
+  box-shadow: 0 0 12px rgba(255, 93, 115, 0.8);
+}
+
+.moon-nova-tip.warn .moon-nova-dot {
+  background: var(--moon-yellow);
+  box-shadow: 0 0 12px rgba(255, 209, 102, 0.8);
+}
+
+.moon-nova-tip.ok .moon-nova-dot {
+  background: var(--moon-green);
+  box-shadow: 0 0 12px rgba(112, 224, 0, 0.8);
+}
+
+.moon-nova-tip strong {
+  display: block;
+  font-size: 0.78rem;
+}
+
+.moon-nova-tip span {
+  color: var(--moon-muted);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 1080px) {
+  .moon-check-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .moon-gauge-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .moon-gauge-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .moon-check-panel {
+    padding: 16px;
+  }
+}
