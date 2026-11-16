@@ -3013,3 +3013,225 @@
     flex: 1;
   }
 }
+
+
+/* ---------- Badges ---------- */
+
+.moon-gallery {
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid var(--moon-border);
+  border-radius: 16px;
+  background: rgba(12, 18, 42, 0.62);
+}
+
+.moon-gallery summary {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 14px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.moon-gallery summary::-webkit-details-marker {
+  display: none;
+}
+
+.moon-gallery-icon {
+  color: var(--moon-yellow);
+  font-size: 0.88rem;
+}
+
+.moon-gallery-title {
+  flex: 1;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.moon-gallery summary strong {
+  font-size: 0.72rem;
+}
+
+.moon-gallery summary em {
+  color: var(--moon-faint);
+  font-size: 0.58rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.moon-gallery[open] summary {
+  border-bottom: 1px solid rgba(126, 150, 255, 0.12);
+}
+
+.moon-gallery[open] summary em {
+  font-size: 0;
+}
+
+.moon-gallery[open] summary em::after {
+  content: "Close";
+  font-size: 0.58rem;
+}
+
+.moon-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  padding: 10px;
+}
+
+.moon-gallery-badge {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 9px;
+  border: 1px solid rgba(126, 150, 255, 0.12);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.02);
+  opacity: 0.62;
+}
+
+.moon-gallery-badge.earned {
+  border-color: rgba(255, 209, 102, 0.26);
+  background: rgba(255, 209, 102, 0.05);
+  opacity: 1;
+}
+
+.moon-gallery-star {
+  flex: none;
+  color: var(--moon-faint);
+  font-size: 0.78rem;
+}
+
+.moon-gallery-badge.earned .moon-gallery-star {
+  color: var(--moon-yellow);
+  text-shadow: 0 0 9px rgba(255, 209, 102, 0.4);
+}
+
+.moon-gallery-badge div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.moon-gallery-badge strong {
+  font-size: 0.68rem;
+}
+
+.moon-gallery-badge p {
+  margin: 0;
+  color: var(--moon-muted);
+  font-size: 0.58rem;
+  line-height: 1.32;
+}
+
+.moon-toasts {
+  position: fixed;
+  right: clamp(14px, 3vw, 28px);
+  bottom: clamp(14px, 3vw, 28px);
+  z-index: 80;
+  pointer-events: none;
+}
+
+.moon-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  width: min(360px, calc(100vw - 28px));
+  padding: 13px 14px;
+  border: 1px solid rgba(255, 209, 102, 0.45);
+  border-radius: 16px;
+  background: rgba(9, 14, 32, 0.95);
+  box-shadow: 0 20px 50px rgba(2, 5, 20, 0.55);
+  backdrop-filter: blur(16px);
+  animation: moon-toast-in 0.34s ease-out;
+  pointer-events: auto;
+}
+
+.moon-toast-star {
+  display: grid;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 209, 102, 0.16);
+  color: var(--moon-yellow);
+  font-size: 1rem;
+  box-shadow: 0 0 18px rgba(255, 209, 102, 0.25);
+}
+
+.moon-toast-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.moon-toast-copy > span {
+  color: var(--moon-yellow);
+  font-size: 0.52rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.moon-toast-copy strong {
+  font-size: 0.82rem;
+}
+
+.moon-toast-copy p {
+  margin: 1px 0 0;
+  color: var(--moon-muted);
+  font-size: 0.66rem;
+  line-height: 1.35;
+}
+
+.moon-toast-close {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid rgba(126, 150, 255, 0.18);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--moon-muted);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.moon-toast-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--moon-text);
+}
+
+@keyframes moon-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 900px) {
+  .moon-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .moon-gallery-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

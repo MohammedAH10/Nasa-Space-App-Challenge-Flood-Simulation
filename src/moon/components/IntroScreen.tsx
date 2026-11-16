@@ -4,6 +4,7 @@ import { ACHIEVEMENTS } from "../achievements";
 import { MISSION } from "../constants";
 import { formatDeltaV } from "../physics";
 import { useMoonStore } from "../store";
+import AchievementGallery from "./AchievementGallery";
 import HangarPanel from "./HangarPanel";
 import Nova from "./Nova";
 
@@ -98,6 +99,8 @@ export default function IntroScreen() {
             </span>
           </article>
         </div>
+
+        <AchievementGallery />
       </div>
 
       <div className="moon-intro-art" aria-hidden="true">

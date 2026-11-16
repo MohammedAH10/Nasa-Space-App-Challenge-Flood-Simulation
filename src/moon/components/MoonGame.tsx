@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { ACHIEVEMENTS } from "../achievements";
 import { useMoonStore } from "../store";
+import AchievementToasts from "./AchievementToasts";
 import AssemblyScreen from "./AssemblyScreen";
 import IntroScreen from "./IntroScreen";
 import LaunchScreen from "./LaunchScreen";
@@ -54,6 +55,8 @@ export default function MoonGame() {
 
         {hydrated && stage === "results" ? <ResultsScreen /> : null}
       </main>
+
+      <AchievementToasts />
     </div>
   );
 }
