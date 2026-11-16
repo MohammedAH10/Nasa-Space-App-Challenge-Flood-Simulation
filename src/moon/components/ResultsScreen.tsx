@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from "react";
 import { getAchievement } from "../achievements";
+import { moonAudio } from "../audio";
 import { MISSION } from "../constants";
 import { formatDeltaV, formatMass } from "../physics";
 import { useMoonStore } from "../store";
@@ -71,13 +72,34 @@ export default function ResultsScreen() {
             <strong>{result.build.name || "Moon Squad 1"}</strong>
           </div>
           <div className="moon-result-actions">
-            <button type="button" className="moon-btn primary" onClick={startLaunch}>
+            <button
+              type="button"
+              className="moon-btn primary"
+              onClick={() => {
+                moonAudio.play("click");
+                startLaunch();
+              }}
+            >
               Fly this rocket again
             </button>
-            <button type="button" className="moon-btn ghost" onClick={backToAssembly}>
+            <button
+              type="button"
+              className="moon-btn ghost"
+              onClick={() => {
+                moonAudio.play("click");
+                backToAssembly();
+              }}
+            >
               Back to the shed
             </button>
-            <button type="button" className="moon-btn ghost" onClick={goHome}>
+            <button
+              type="button"
+              className="moon-btn ghost"
+              onClick={() => {
+                moonAudio.play("click");
+                goHome();
+              }}
+            >
               Home
             </button>
           </div>

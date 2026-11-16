@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState, type DragEvent } from "react";
+import { useEffect, useMemo, useState, type DragEvent } from "react";
+import { moonAudio } from "../audio";
 import { formatDeltaV, formatMass } from "../physics";
 import { getPart, slotInfo } from "../parts";
 import { useMoonStore } from "../store";
@@ -26,6 +27,10 @@ export default function AssemblyScreen() {
   const setStage = useMoonStore((state) => state.setStage);
   const [dropActive, setDropActive] = useState(false);
 
+  useEffect(() => {
+    if (lastFit) moonAudio.play("fit");
+  }, [lastFit]);
+
   const evaluation = useMemo(() => evaluateBuild(build), [build]);
   const firstMissing = evaluation.missing[0] ?? null;
   const activeSlot: PartSlot = selectedSlot ?? firstMissing ?? "nose";
@@ -49,10 +54,24 @@ export default function AssemblyScreen() {
           <h1>Build your Moon rocket</h1>
         </div>
         <div className="moon-assembly-actions">
-          <button type="button" className="moon-btn ghost small" onClick={loadBlueprint}>
+          <button
+            type="button"
+            className="moon-btn ghost small"
+            onClick={() => {
+              moonAudio.play("click");
+              loadBlueprint();
+            }}
+          >
             Nova&apos;s blueprint
           </button>
-          <button type="button" className="moon-btn ghost small" onClick={resetBuild}>
+          <button
+            type="button"
+            className="moon-btn ghost small"
+            onClick={() => {
+              moonAudio.play("click");
+              resetBuild();
+            }}
+          >
             Reset rocket
           </button>
         </div>
@@ -171,13 +190,24 @@ export default function AssemblyScreen() {
           </div>
         </div>
         <div className="moon-dock-actions">
-          <button type="button" className="moon-btn ghost" onClick={() => setStage("intro")}>
+          <button
+            type="button"
+            className="moon-btn ghost"
+            onClick={() => {
+              moonAudio.play("click");
+              setStage("intro");
+            }}
+          >
             Mission brief
           </button>
           <button
             type="button"
             className="moon-btn primary moon-launch-btn"
-            onClick={startLaunch}
+            onClick={() => {
+              if (!evaluation.canLaunch) return;
+              moonAudio.play("click");
+              startLaunch();
+            }}
             disabled={!evaluation.canLaunch}
           >
             Launch mission

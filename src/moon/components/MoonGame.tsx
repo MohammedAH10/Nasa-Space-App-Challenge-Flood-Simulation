@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { ACHIEVEMENTS } from "../achievements";
+import { moonAudio } from "../audio";
 import { useMoonStore } from "../store";
 import AchievementToasts from "./AchievementToasts";
 import AssemblyScreen from "./AssemblyScreen";
@@ -16,10 +17,26 @@ export default function MoonGame() {
   const setStage = useMoonStore((state) => state.setStage);
   const bestScore = useMoonStore((state) => state.bestScore);
   const achievements = useMoonStore((state) => state.achievements);
+  const soundOn = useMoonStore((state) => state.soundOn);
+  const toggleSound = useMoonStore((state) => state.toggleSound);
 
   useEffect(() => {
     hydrate();
   }, [hydrate]);
+
+  useEffect(() => {
+    moonAudio.setEnabled(soundOn);
+  }, [soundOn]);
+
+  useEffect(() => {
+    const unlock = () => moonAudio.unlock();
+    window.addEventListener("pointerdown", unlock, { once: true });
+    window.addEventListener("keydown", unlock, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
+    };
+  }, []);
 
   return (
     <div className="moon-app">
@@ -37,6 +54,22 @@ export default function MoonGame() {
           {ACHIEVEMENTS.length} badges
         </span>
         <span className="moon-topbar-spacer" />
+        <div className="moon-topbar-actions">
+          <button
+            type="button"
+            className="moon-icon-btn"
+            onClick={() => {
+              if (!soundOn) moonAudio.unlock();
+              else moonAudio.play("click");
+              toggleSound();
+            }}
+            aria-pressed={soundOn}
+            aria-label={soundOn ? "Mute sound" : "Turn sound on"}
+            title={soundOn ? "Mute sound" : "Turn sound on"}
+          >
+            {soundOn ? "Sound on" : "Muted"}
+          </button>
+        </div>
       </header>
 
       <main className="moon-main">

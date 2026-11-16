@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { getAchievement } from "../achievements";
+import { moonAudio } from "../audio";
 import { useMoonStore } from "../store";
 
 export default function AchievementToasts() {
@@ -11,6 +12,7 @@ export default function AchievementToasts() {
 
   useEffect(() => {
     if (!current) return;
+    moonAudio.play("badge");
     const timer = window.setTimeout(() => dismiss(), 4200);
     return () => window.clearTimeout(timer);
   }, [current, dismiss]);

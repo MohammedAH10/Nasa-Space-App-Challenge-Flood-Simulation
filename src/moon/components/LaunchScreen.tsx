@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { moonAudio } from "../audio";
 import { FLIGHT_PHASES, PHASE_DURATION } from "../constants";
 import {
   createFlightRuntime,
@@ -9,7 +10,12 @@ import {
   stepFlight,
 } from "../flight";
 import { useMoonStore } from "../store";
-import type { FlightInput, FlightRuntime, MissionResult } from "../types";
+import type {
+  FlightInput,
+  FlightPhase,
+  FlightRuntime,
+  MissionResult,
+} from "../types";
 import { evaluateBuild } from "../validation";
 import FlightScene from "../scene/FlightScene";
 
@@ -37,6 +43,8 @@ export default function LaunchScreen() {
   const [paused, setPaused] = useState(false);
   const [steerInput, setSteerInput] = useState(0);
   const [result, setResult] = useState<MissionResult | null>(null);
+  const previousPhase = useRef<FlightPhase | null>(null);
+  const previousStaged = useRef(false);
 
   useEffect(() => {
     const runtime = createFlightRuntime(evaluation);
@@ -83,6 +91,11 @@ export default function LaunchScreen() {
       cancelAnimationFrame(frame);
     };
   }, [evaluation]);
+
+  useEffect(() => {
+    if (!result) return;
+    moonAudio.play(result.success ? "success" : "failure");
+  }, [result]);
 
   useEffect(() => {
     const isControl = (target: EventTarget | null) =>
@@ -145,12 +158,14 @@ export default function LaunchScreen() {
 
   const togglePause = () => {
     if (runtimeRef.current?.done) return;
+    moonAudio.play("click");
     pausedRef.current = !pausedRef.current;
     setPaused(pausedRef.current);
   };
 
   const finish = () => {
     if (!result) return;
+    moonAudio.play("click");
     completeMission(result);
   };
 
@@ -167,6 +182,29 @@ export default function LaunchScreen() {
     phase === "countdown"
       ? Math.max(1, Math.ceil(PHASE_DURATION.countdown - snapshot.phaseElapsed))
       : 0;
+
+  useEffect(() => {
+    if (phase === "countdown" && countdown > 0) {
+      moonAudio.play("countdown");
+    }
+  }, [countdown, phase]);
+
+  useEffect(() => {
+    if (phase === previousPhase.current) return;
+    if (phase === "liftoff") moonAudio.play("liftoff");
+    previousPhase.current = phase;
+  }, [phase]);
+
+  useEffect(() => {
+    if (
+      snapshot.staged &&
+      !previousStaged.current &&
+      evaluation.stats.hasBoosters
+    ) {
+      moonAudio.play("stage");
+    }
+    previousStaged.current = snapshot.staged;
+  }, [snapshot.staged, evaluation.stats.hasBoosters]);
 
   return (
     <section className="moon-launch">
@@ -187,7 +225,10 @@ export default function LaunchScreen() {
           <button
             type="button"
             className="moon-btn ghost small"
-            onClick={backToAssembly}
+            onClick={() => {
+              moonAudio.play("click");
+              backToAssembly();
+            }}
           >
             Back to shed
           </button>
