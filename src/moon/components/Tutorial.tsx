@@ -43,19 +43,53 @@ export default function Tutorial() {
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    dialogRef.current?.focus();
+    const dialog = dialogRef.current;
+    const previous =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+    dialog?.focus();
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         moonAudio.play("click");
         closeTutorial();
-      } else if (event.key === "ArrowRight") {
+        return;
+      }
+      if (event.key === "ArrowRight") {
         setStep((current) => Math.min(STEPS.length - 1, current + 1));
-      } else if (event.key === "ArrowLeft") {
+        return;
+      }
+      if (event.key === "ArrowLeft") {
         setStep((current) => Math.max(0, current - 1));
+        return;
+      }
+      if (event.key !== "Tab" || !dialog) return;
+
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && (active === first || active === dialog)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
+
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      previous?.focus();
+    };
   }, [closeTutorial]);
 
   const current = STEPS[step];

@@ -50,6 +50,9 @@ export default function MoonGame() {
 
   return (
     <div className="moon-app">
+      <a className="moon-skip" href="#moon-main">
+        Skip to game
+      </a>
       <header className="moon-topbar">
         <button
           type="button"
@@ -93,7 +96,7 @@ export default function MoonGame() {
         </div>
       </header>
 
-      <main className="moon-main">
+      <main className="moon-main" id="moon-main" tabIndex={-1}>
         {!hydrated ? (
           <div className="moon-boot">
             <span className="moon-spinner" />

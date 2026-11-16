@@ -3479,3 +3479,57 @@
     padding: 20px;
   }
 }
+
+
+/* ---------- Accessibility ---------- */
+
+.moon-skip {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  padding: 10px 14px;
+  border: 1px solid var(--moon-cyan);
+  border-radius: 10px;
+  background: #081022;
+  color: var(--moon-text);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 0.15s ease;
+}
+
+.moon-skip:focus {
+  transform: translateY(0);
+}
+
+.moon-app :where(button, a, input, summary):focus-visible {
+  outline: 2px solid var(--moon-cyan);
+  outline-offset: 3px;
+}
+
+.moon-main:focus {
+  outline: none;
+}
+
+.moon-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moon-app *,
+  .moon-app *::before,
+  .moon-app *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}

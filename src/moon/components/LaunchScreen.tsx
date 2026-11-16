@@ -219,6 +219,7 @@ export default function LaunchScreen() {
             className="moon-btn ghost small"
             onClick={togglePause}
             disabled={phase === "done"}
+            aria-pressed={paused}
           >
             {paused ? "Resume" : "Pause"}
           </button>
@@ -306,6 +307,7 @@ export default function LaunchScreen() {
                       type="button"
                       className={`moon-steer-btn ${steerInput < 0 ? "active" : ""}`}
                       aria-label="Steer left"
+                      aria-keyshortcuts="ArrowLeft A"
                       onPointerDown={(event) => {
                         event.currentTarget.setPointerCapture(event.pointerId);
                         setSteer(-1);
@@ -321,6 +323,7 @@ export default function LaunchScreen() {
                       type="button"
                       className={`moon-steer-btn ${steerInput > 0 ? "active" : ""}`}
                       aria-label="Steer right"
+                      aria-keyshortcuts="ArrowRight D"
                       onPointerDown={(event) => {
                         event.currentTarget.setPointerCapture(event.pointerId);
                         setSteer(1);
@@ -362,6 +365,7 @@ export default function LaunchScreen() {
                       className="moon-stage-btn"
                       onClick={pressStage}
                       disabled={snapshot.staged || !snapshot.stageWindow}
+                      aria-keyshortcuts="Space"
                     >
                       {snapshot.staged ? "Away" : "Stage"}
                     </button>
@@ -389,7 +393,14 @@ export default function LaunchScreen() {
           </div>
         </div>
 
-        <div className="moon-phase-track" aria-hidden="true">
+        <div
+          className="moon-phase-track"
+          role="progressbar"
+          aria-label="Mission progress"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(snapshot.progress * 100)}
+        >
           {FLIGHT_PHASES.map((item, index) => (
             <span
               key={item.phase}
@@ -427,7 +438,11 @@ export default function LaunchScreen() {
         ) : null}
 
         {result ? (
-          <div className={`moon-flight-result ${result.success ? "success" : "failure"}`}>
+          <div
+            className={`moon-flight-result ${result.success ? "success" : "failure"}`}
+            role="status"
+            aria-live="polite"
+          >
             <span className="moon-eyebrow">
               {result.success ? "Touchdown confirmed" : "Mission ended"}
             </span>

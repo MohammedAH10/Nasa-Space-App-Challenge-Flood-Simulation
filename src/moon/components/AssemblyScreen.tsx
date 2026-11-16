@@ -36,6 +36,10 @@ export default function AssemblyScreen() {
   const activeSlot: PartSlot = selectedSlot ?? firstMissing ?? "nose";
   const activeInfo = slotInfo(activeSlot);
 
+  const fitAnnouncement = lastFit
+    ? `${getPart(lastFit.partId)?.name ?? "Part"} fitted to ${slotInfo(lastFit.slot).label}.`
+    : "";
+
   const onDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     setDropActive(false);
@@ -48,6 +52,9 @@ export default function AssemblyScreen() {
 
   return (
     <section className="moon-assembly">
+      <div className="moon-sr-only" aria-live="polite">
+        {fitAnnouncement}
+      </div>
       <div className="moon-assembly-head">
         <div>
           <p className="moon-eyebrow">Assembly bay · Mission 01</p>
