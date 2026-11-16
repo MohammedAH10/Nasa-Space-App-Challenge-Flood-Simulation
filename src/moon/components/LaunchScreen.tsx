@@ -35,6 +35,7 @@ export default function LaunchScreen() {
     createFlightRuntime(evaluation),
   );
   const [paused, setPaused] = useState(false);
+  const [steerInput, setSteerInput] = useState(0);
   const [result, setResult] = useState<MissionResult | null>(null);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function LaunchScreen() {
 
       if (!pausedRef.current && runtime.phase !== "done") {
         stepFlight(runtime, evaluation, delta, inputRef.current);
+        inputRef.current.stagePressed = false;
       }
 
       hudTimer += delta;
@@ -81,6 +83,65 @@ export default function LaunchScreen() {
       cancelAnimationFrame(frame);
     };
   }, [evaluation]);
+
+  useEffect(() => {
+    const isControl = (target: EventTarget | null) =>
+      target instanceof HTMLElement &&
+      Boolean(target.closest("button, input, textarea, select, a"));
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (isControl(event.target)) return;
+      if (event.key === "ArrowLeft" || event.key === "a" || event.key === "A") {
+        event.preventDefault();
+        inputRef.current.steer = -1;
+        setSteerInput(-1);
+      } else if (event.key === "ArrowRight" || event.key === "d" || event.key === "D") {
+        event.preventDefault();
+        inputRef.current.steer = 1;
+        setSteerInput(1);
+      } else if (event.code === "Space") {
+        event.preventDefault();
+        inputRef.current.stagePressed = true;
+      }
+    };
+
+    const onKeyUp = (event: KeyboardEvent) => {
+      if (
+        event.key === "ArrowLeft" ||
+        event.key === "ArrowRight" ||
+        event.key === "a" ||
+        event.key === "A" ||
+        event.key === "d" ||
+        event.key === "D"
+      ) {
+        inputRef.current.steer = 0;
+        setSteerInput(0);
+      }
+    };
+
+    const onBlur = () => {
+      inputRef.current.steer = 0;
+      setSteerInput(0);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
+    window.addEventListener("blur", onBlur);
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("blur", onBlur);
+    };
+  }, []);
+
+  const setSteer = (value: number) => {
+    inputRef.current.steer = value;
+    setSteerInput(value);
+  };
+
+  const pressStage = () => {
+    inputRef.current.stagePressed = true;
+  };
 
   const togglePause = () => {
     if (runtimeRef.current?.done) return;
@@ -181,12 +242,108 @@ export default function LaunchScreen() {
           </div>
 
           <div className="moon-hud-bottom">
-            <p className="moon-flight-message" aria-live="polite">
-              {snapshot.message}
-            </p>
-            <div className="moon-launch-status">
-              <span className={`moon-status-dot ${paused ? "paused" : ""}`} />
-              {paused ? "Paused" : phase === "done" ? "Touchdown" : "Live"}
+            {phase === "ascent" ? (
+              <div className="moon-flight-controls">
+                <div className="moon-steer-panel">
+                  <div className="moon-steer-head">
+                    <span>Steering</span>
+                    <em>follow the green marker</em>
+                  </div>
+                  <div className="moon-steer-meter" aria-hidden="true">
+                    <span className="moon-steer-center" />
+                    <span
+                      className="moon-steer-target"
+                      style={{ left: `${50 + snapshot.steerTarget * 46}%` }}
+                    />
+                    <span
+                      className="moon-steer-pilot"
+                      style={{ left: `${50 + snapshot.steer * 46}%` }}
+                    />
+                  </div>
+                  <div className="moon-steer-buttons">
+                    <button
+                      type="button"
+                      className={`moon-steer-btn ${steerInput < 0 ? "active" : ""}`}
+                      aria-label="Steer left"
+                      onPointerDown={(event) => {
+                        event.currentTarget.setPointerCapture(event.pointerId);
+                        setSteer(-1);
+                      }}
+                      onPointerUp={() => setSteer(0)}
+                      onPointerCancel={() => setSteer(0)}
+                      onLostPointerCapture={() => setSteer(0)}
+                      onContextMenu={(event) => event.preventDefault()}
+                    >
+                      Left
+                    </button>
+                    <button
+                      type="button"
+                      className={`moon-steer-btn ${steerInput > 0 ? "active" : ""}`}
+                      aria-label="Steer right"
+                      onPointerDown={(event) => {
+                        event.currentTarget.setPointerCapture(event.pointerId);
+                        setSteer(1);
+                      }}
+                      onPointerUp={() => setSteer(0)}
+                      onPointerCancel={() => setSteer(0)}
+                      onLostPointerCapture={() => setSteer(0)}
+                      onContextMenu={(event) => event.preventDefault()}
+                    >
+                      Right
+                    </button>
+                  </div>
+                </div>
+
+                {evaluation.stats.hasBoosters ? (
+                  <div
+                    className={`moon-stage-panel ${
+                      snapshot.staged
+                        ? "done"
+                        : snapshot.stageWindow
+                          ? "open"
+                          : ""
+                    }`}
+                  >
+                    <div className="moon-stage-copy">
+                      <span>Boosters</span>
+                      <strong>
+                        {snapshot.staged
+                          ? snapshot.stageQuality >= 1
+                            ? "Perfect staging!"
+                            : "Boosters away"
+                          : snapshot.stageWindow
+                            ? "Window open!"
+                            : "Wait for the glow"}
+                      </strong>
+                    </div>
+                    <button
+                      type="button"
+                      className="moon-stage-btn"
+                      onClick={pressStage}
+                      disabled={snapshot.staged || !snapshot.stageWindow}
+                    >
+                      {snapshot.staged ? "Away" : "Stage"}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="moon-stage-panel single">
+                    <div className="moon-stage-copy">
+                      <span>Single stage</span>
+                      <strong>No boosters to drop</strong>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : null}
+
+            <div className="moon-hud-bottom-row">
+              <p className="moon-flight-message" aria-live="polite">
+                {snapshot.message}
+              </p>
+              <div className="moon-launch-status">
+                <span className={`moon-status-dot ${paused ? "paused" : ""}`} />
+                {paused ? "Paused" : phase === "done" ? "Touchdown" : "Live"}
+              </div>
             </div>
           </div>
         </div>

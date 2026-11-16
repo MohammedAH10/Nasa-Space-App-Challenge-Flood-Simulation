@@ -1896,10 +1896,17 @@
 
 .moon-hud-bottom {
   display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 22px;
+}
+
+.moon-hud-bottom-row {
+  display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 12px;
-  padding-bottom: 22px;
 }
 
 .moon-flight-message {
@@ -2169,9 +2176,9 @@
     font-size: 0.8rem;
   }
 
-  .moon-hud-bottom {
+  .moon-hud-bottom-row {
     align-items: stretch;
-    flex-direction: column-reverse;
+    flex-direction: column;
     gap: 8px;
   }
 
@@ -2181,5 +2188,235 @@
 
   .moon-launch-status {
     align-self: flex-start;
+  }
+}
+
+
+/* ---------- Flight controls ---------- */
+
+.moon-flight-controls {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.moon-steer-panel {
+  width: min(360px, 100%);
+  padding: 10px 12px;
+  border: 1px solid rgba(126, 150, 255, 0.22);
+  border-radius: 16px;
+  background: rgba(6, 10, 24, 0.76);
+  backdrop-filter: blur(12px);
+}
+
+.moon-steer-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.moon-steer-head span {
+  color: var(--moon-text);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.moon-steer-head em {
+  color: var(--moon-faint);
+  font-size: 0.54rem;
+  font-style: normal;
+}
+
+.moon-steer-meter {
+  position: relative;
+  height: 20px;
+  margin: 6px 0 8px;
+}
+
+.moon-steer-meter::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-50%);
+}
+
+.moon-steer-center {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 50%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.moon-steer-target,
+.moon-steer-pilot {
+  position: absolute;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 0.08s linear;
+}
+
+.moon-steer-target {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--moon-green);
+  box-shadow: 0 0 12px rgba(112, 224, 0, 0.75);
+}
+
+.moon-steer-pilot {
+  width: 9px;
+  height: 9px;
+  background: var(--moon-cyan);
+  box-shadow: 0 0 12px rgba(76, 201, 240, 0.85);
+}
+
+.moon-steer-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.moon-steer-btn {
+  padding: 9px 10px;
+  border: 1px solid rgba(126, 150, 255, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--moon-text);
+  font-family: inherit;
+  font-size: 0.64rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  touch-action: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.moon-steer-btn.active {
+  border-color: rgba(76, 201, 240, 0.75);
+  background: rgba(76, 201, 240, 0.22);
+  box-shadow: 0 0 18px rgba(76, 201, 240, 0.3);
+}
+
+.moon-stage-panel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 210px;
+  padding: 10px 12px;
+  border: 1px solid rgba(126, 150, 255, 0.22);
+  border-radius: 16px;
+  background: rgba(6, 10, 24, 0.76);
+  backdrop-filter: blur(12px);
+}
+
+.moon-stage-panel.open {
+  border-color: rgba(255, 209, 102, 0.72);
+  background: rgba(54, 42, 9, 0.82);
+  animation: moon-stage-glow 1s ease-in-out infinite;
+}
+
+.moon-stage-panel.done {
+  border-color: rgba(112, 224, 0, 0.42);
+  background: rgba(18, 45, 10, 0.7);
+}
+
+.moon-stage-panel.single {
+  opacity: 0.72;
+}
+
+.moon-stage-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.moon-stage-copy span {
+  color: var(--moon-faint);
+  font-size: 0.54rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.moon-stage-copy strong {
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.moon-stage-btn {
+  flex: none;
+  padding: 11px 16px;
+  border: 1px solid rgba(255, 209, 102, 0.6);
+  border-radius: 12px;
+  background: var(--moon-yellow);
+  color: #1d1400;
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.moon-stage-panel.open .moon-stage-btn {
+  animation: moon-stage-pulse 0.8s ease-in-out infinite;
+  box-shadow: 0 0 24px rgba(255, 209, 102, 0.6);
+}
+
+.moon-stage-btn:disabled {
+  border-color: rgba(126, 150, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--moon-faint);
+  box-shadow: none;
+  animation: none;
+  cursor: default;
+}
+
+@keyframes moon-stage-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 rgba(255, 209, 102, 0);
+  }
+  50% {
+    box-shadow: 0 0 26px rgba(255, 209, 102, 0.35);
+  }
+}
+
+@keyframes moon-stage-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@media (max-width: 760px) {
+  .moon-flight-controls {
+    flex-wrap: wrap;
+  }
+
+  .moon-steer-panel {
+    width: 100%;
+  }
+
+  .moon-stage-panel {
+    flex: 1;
+    min-width: 0;
   }
 }
