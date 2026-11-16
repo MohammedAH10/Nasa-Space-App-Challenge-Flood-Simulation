@@ -3,16 +3,16 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Orbit Quest — Satellite Mission Design Lab",
+  title: "Moon Squad — Build a rocket, land on the Moon",
   description:
-    "Design a satellite, balance mass, power, battery, downlink, and budget, then test it with a 1,000-run Monte Carlo simulation.",
-  applicationName: "Orbit Quest",
+    "A kid-friendly WebGL rocket builder. Fit parts, balance thrust and fuel, then fly to the Moon with a steering and staging mini-game.",
+  applicationName: "Moon Squad",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#05080f",
+  themeColor: "#070b1f",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

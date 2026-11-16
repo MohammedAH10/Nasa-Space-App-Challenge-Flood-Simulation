@@ -1,5 +1,5 @@
-import GameShell from "@/components/GameShell";
+import MoonGame from "@/moon/components/MoonGame";
 
 export default function Home() {
-  return <GameShell />;
+  return <MoonGame />;
 }
